@@ -53,7 +53,7 @@ export class AuthService {
   static isRider(): boolean {
     const user = this.getUser();
     if (user) {
-      return user.group === 'sang_peduli';
+      return user.group === 'rider';
     }
     return false;
   }
@@ -61,7 +61,7 @@ export class AuthService {
   static isDriver(): boolean {
     const user = this.getUser();
     if (user) {
-      return user.group === 'sang_pemilah';
+      return user.group === 'driver';
     }
     return false;
   }

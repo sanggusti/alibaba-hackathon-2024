@@ -9,7 +9,7 @@ export const createFakeUser = (data?: Partial<User>): User => {
     username: faker.internet.email(),
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    group: 'sang_peduli',
+    group: 'rider',
     photo: faker.image.imageUrl()
   }, data);
 };
@@ -32,7 +32,7 @@ export const createFakeTrip = (data?: Partial<Trip>): Trip => {
     pick_up_address: faker.address.streetAddress(),
     drop_off_address: faker.address.streetAddress(),
     status: 'REQUESTED',
-    driver: createFakeUser({ group: 'sang_pemilah' }),
+    driver: createFakeUser({ group: 'driver' }),
     rider: createFakeUser()
   }, data);
 };

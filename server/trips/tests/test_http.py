@@ -17,7 +17,7 @@ from trips.serializers import TripSerializer, UserSerializer
 PASSWORD = 'pAssw0rd!'
 
 
-def create_user(username='user@example.com', password=PASSWORD, group_name='sang_peduli'):
+def create_user(username='user@example.com', password=PASSWORD, group_name='rider'):
     group, _ = Group.objects.get_or_create(name=group_name)
     user = get_user_model().objects.create_user(
         username=username, password=password)
@@ -42,7 +42,7 @@ class AuthenticationTest(APITestCase):
             'last_name': 'User',
             'password1': PASSWORD,
             'password2': PASSWORD,
-            'group': 'sang_peduli',
+            'group': 'rider',
             'photo': photo_file, # new
         })
         user = get_user_model().objects.last()

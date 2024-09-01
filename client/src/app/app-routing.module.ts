@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'sign-up', component: SignUpComponent },
   { path: 'log-in', component: LogInComponent },
   {
-    path: 'sang_peduli',
+    path: 'rider',
     component: RiderComponent,
     canActivate: [
       IsRider
@@ -44,7 +44,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'sang_pemilah',
+    path: 'driver',
     component: DriverComponent,
     canActivate: [
       IsDriver
