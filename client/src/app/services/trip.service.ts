@@ -37,7 +37,7 @@ export class TripService {
   webSocket!: WebSocketSubject<any>;
   messages!: Observable<any>;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   connect(): void {
     if (!this.webSocket || this.webSocket.closed) {

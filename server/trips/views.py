@@ -24,10 +24,10 @@ class TripView(viewsets.ReadOnlyModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        if user.group == 'driver':
+        if user.group == 'sang_pemilah':
             return Trip.objects.filter(
                 Q(status=Trip.REQUESTED) | Q(driver=user)
             )
-        if user.group == 'rider':
+        if user.group == 'sang_peduli':
             return Trip.objects.filter(rider=user)
         return Trip.objects.none()

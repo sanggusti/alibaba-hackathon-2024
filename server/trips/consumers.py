@@ -21,7 +21,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
     @database_sync_to_async
     def _get_trip_ids(self, user):
         user_groups = user.groups.values_list('name', flat=True)
-        if 'driver' in user_groups:
+        if 'sang_pemilah' in user_groups:
             trip_ids = user.trips_as_driver.exclude(
                 status=Trip.COMPLETED
             ).only('id').values_list('id', flat=True)
@@ -48,7 +48,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
         else:
             user_group = await self._get_user_group(user)
-            if user_group == 'driver':
+            if user_group == 'sang_pemilah':
                 await self.channel_layer.group_add(
                     group='drivers',
                     channel=self.channel_name
@@ -90,7 +90,7 @@ class TaxiConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
         else:
             user_group = await self._get_user_group(user)
-            if user_group == 'driver':
+            if user_group == 'sang_pemilah':
                 await self.channel_layer.group_discard(
                     group='drivers',
                     channel=self.channel_name

@@ -10,14 +10,14 @@ describe('IsDriver', () => {
 
   it('should allow a driver to access a route', () => {
     localStorage.setItem('taxi.auth', JSON.stringify(
-      createFakeToken(createFakeUser({ group: 'driver' }))
+      createFakeToken(createFakeUser({ group: 'sang_pemilah' }))
     ));
     expect(isDriver.canActivate()).toBeTruthy();
   });
 
   it('should not allow a non-driver to access a route', () => {
     localStorage.setItem('taxi.auth', JSON.stringify(
-      createFakeToken(createFakeUser({ group: 'rider' }))
+      createFakeToken(createFakeUser({ group: 'sang_peduli' }))
     ));
     expect(isDriver.canActivate()).toBeFalsy();
   });

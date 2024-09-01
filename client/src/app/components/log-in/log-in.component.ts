@@ -7,7 +7,7 @@ class UserData {
   constructor(
     public username: string = '',
     public password: string = '',
-  ) { }
+  ) {}
 }
 
 @Component({
@@ -21,7 +21,7 @@ export class LogInComponent {
   constructor(
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 
   onSubmit(): void {
     this.authService.logIn(

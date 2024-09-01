@@ -12,7 +12,7 @@ export class TripCardComponent {
   @Input() title!: string;
   @Input() trips!: ReadonlyArray<Trip>;
 
-  constructor() { }
+  constructor() {}
 
   otherUser(trip: Trip): User | null {
     return otherUser(trip);

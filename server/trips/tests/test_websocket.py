@@ -21,7 +21,7 @@ TEST_CHANNEL_LAYERS = {
 def create_user(
     username,
     password,
-    group='rider'
+    group='sang_peduli'
 ):
     # Create user.
     user = get_user_model().objects.create_user(
@@ -105,7 +105,7 @@ class TestWebSocket:
     async def test_join_driver_pool(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
         _, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'driver'
+            'test.user@example.com', 'pAssw0rd', 'sang_pemilah'
         )
         communicator = WebsocketCommunicator(
             application=application,
@@ -125,7 +125,7 @@ class TestWebSocket:
     async def test_request_trip(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
         user, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'rider'
+            'test.user@example.com', 'pAssw0rd', 'sang_peduli'
         )
         communicator = WebsocketCommunicator(
             application=application,
@@ -137,7 +137,7 @@ class TestWebSocket:
             'data': {
                 'pick_up_address': '123 Main Street',
                 'drop_off_address': '456 Piney Road',
-                'rider': user.id,
+                'sang_peduli': user.id,
             },
         })
         response = await communicator.receive_json_from()
@@ -146,8 +146,8 @@ class TestWebSocket:
         assert response_data['pick_up_address'] == '123 Main Street'
         assert response_data['drop_off_address'] == '456 Piney Road'
         assert response_data['status'] == 'REQUESTED'
-        assert response_data['rider']['username'] == user.username
-        assert response_data['driver'] is None
+        assert response_data['sang_peduli']['username'] == user.username
+        assert response_data['sang_pemilah'] is None
         await communicator.disconnect()
 
     async def test_driver_alerted_on_request(self, settings):
@@ -161,7 +161,7 @@ class TestWebSocket:
         )
 
         user, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'rider'
+            'test.user@example.com', 'pAssw0rd', 'sang_peduli'
         )
         communicator = WebsocketCommunicator(
             application=application,
@@ -175,7 +175,7 @@ class TestWebSocket:
             'data': {
                 'pick_up_address': '123 Main Street',
                 'drop_off_address': '456 Piney Road',
-                'rider': user.id,
+                'sang_peduli': user.id,
             },
         })
 
@@ -184,15 +184,15 @@ class TestWebSocket:
         response_data = response.get('data')
 
         assert response_data['id'] is not None
-        assert response_data['rider']['username'] == user.username
-        assert response_data['driver'] is None
+        assert response_data['sang_peduli']['username'] == user.username
+        assert response_data['sang_pemilah'] is None
 
         await communicator.disconnect()
 
     async def test_create_trip_group(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
         user, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'rider'
+            'test.user@example.com', 'pAssw0rd', 'sang_peduli'
         )
         communicator = WebsocketCommunicator(
             application=application,
@@ -206,7 +206,7 @@ class TestWebSocket:
             'data': {
                 'pick_up_address': '123 Main Street',
                 'drop_off_address': '456 Piney Road',
-                'rider': user.id,
+                'sang_peduli': user.id,
             },
         })
         response = await communicator.receive_json_from()
@@ -229,7 +229,7 @@ class TestWebSocket:
     async def test_join_trip_group_on_connect(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
         user, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'rider'
+            'test.user@example.com', 'pAssw0rd', 'sang_peduli'
         )
         trip = await create_trip(rider=user)
         communicator = WebsocketCommunicator(
@@ -257,7 +257,7 @@ class TestWebSocket:
 
         # Create trip request.
         rider, _ = await create_user(
-            'test.rider@example.com', 'pAssw0rd', 'rider'
+            'test.rider@example.com', 'pAssw0rd', 'sang_peduli'
         )
         trip = await create_trip(rider=rider)
         trip_id = f'{trip.id}'
@@ -271,7 +271,7 @@ class TestWebSocket:
 
         # Update trip.
         driver, access = await create_user(
-            'test.driver@example.com', 'pAssw0rd', 'driver'
+            'test.driver@example.com', 'pAssw0rd', 'sang_pemilah'
         )
         communicator = WebsocketCommunicator(
             application=application,
@@ -285,7 +285,7 @@ class TestWebSocket:
                 'pick_up_address': trip.pick_up_address,
                 'drop_off_address': trip.drop_off_address,
                 'status': Trip.IN_PROGRESS,
-                'driver': driver.id,
+                'sang_pemilah': driver.id,
             },
         }
         await communicator.send_json_to(message)
@@ -294,15 +294,15 @@ class TestWebSocket:
         response = await channel_layer.receive('test_channel')
         response_data = response.get('data')
         assert response_data['id'] == trip_id
-        assert response_data['rider']['username'] == rider.username
-        assert response_data['driver']['username'] == driver.username
+        assert response_data['sang_peduli']['username'] == rider.username
+        assert response_data['sang_pemilah']['username'] == driver.username
 
         await communicator.disconnect()
 
     async def test_driver_join_trip_group_on_connect(self, settings):
         settings.CHANNEL_LAYERS = TEST_CHANNEL_LAYERS
         user, access = await create_user(
-            'test.user@example.com', 'pAssw0rd', 'driver'
+            'test.user@example.com', 'pAssw0rd', 'sang_pemilah'
         )
         trip = await create_trip(driver=user)
         communicator = WebsocketCommunicator(

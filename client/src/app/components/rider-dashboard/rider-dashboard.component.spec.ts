@@ -25,7 +25,7 @@ describe('RiderDashboardComponent', () => {
 
   class MockTripService {
     messages: Observable<any> = of();
-    connect(): void { }
+    connect(): void {}
   }
 
   beforeEach(() => {

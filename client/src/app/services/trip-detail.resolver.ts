@@ -9,7 +9,7 @@ import { Trip, TripService } from './trip.service';
   providedIn: 'root'
 })
 export class TripDetailResolver implements Resolve<Trip> {
-  constructor(private tripService: TripService) { }
+  constructor(private tripService: TripService) {}
 
   resolve(route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<Trip> {
     return this.tripService.getTrip(route.params['id']);

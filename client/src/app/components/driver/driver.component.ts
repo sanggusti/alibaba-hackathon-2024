@@ -5,4 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './driver.component.html',
   styleUrls: ['./driver.component.css']
 })
-export class DriverComponent { }
+export class DriverComponent {}

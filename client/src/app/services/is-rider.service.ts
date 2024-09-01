@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
   providedIn: 'root'
 })
 export class IsRider implements CanActivate {
-  constructor() { }
+  constructor() {}
 
   canActivate(): boolean {
     return AuthService.isRider();

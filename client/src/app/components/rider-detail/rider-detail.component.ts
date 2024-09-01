@@ -11,7 +11,7 @@ import { Trip } from '../../services/trip.service';
 export class RiderDetailComponent implements OnInit {
   trip!: Trip;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(data => this.trip = data['trip']);

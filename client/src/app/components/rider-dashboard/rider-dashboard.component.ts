@@ -19,7 +19,7 @@ export class RiderDashboardComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private toastr: ToastrService,
     private tripService: TripService
-  ) { }
+  ) {}
 
   get currentTrips(): ReadonlyArray<Trip> {
     return this.trips.filter(trip => {

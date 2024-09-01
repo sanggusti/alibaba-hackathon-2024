@@ -27,7 +27,7 @@ describe('DriverDetailComponent', () => {
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([])
       ],
-      declarations: [DriverDetailComponent],
+      declarations: [ DriverDetailComponent ],
       providers: [
         TripService,
         { provide: ActivatedRoute, useClass: MockActivatedRoute }

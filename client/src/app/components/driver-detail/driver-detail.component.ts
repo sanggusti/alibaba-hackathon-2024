@@ -15,7 +15,7 @@ export class DriverDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private tripService: TripService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(data => this.trip = data['trip']);

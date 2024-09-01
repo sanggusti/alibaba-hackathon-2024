@@ -11,7 +11,7 @@ class UserData {
     public password: string = '',
     public group: string = '',
     public photo: any = '',
-  ) { }
+  ) {}
 }
 
 @Component({
@@ -25,7 +25,7 @@ export class SignUpComponent {
   constructor(
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 
   onChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {

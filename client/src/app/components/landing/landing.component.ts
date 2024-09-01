@@ -8,7 +8,7 @@ import { AuthService, User } from '../../services/auth.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   getUser(): User | undefined {
     return AuthService.getUser();

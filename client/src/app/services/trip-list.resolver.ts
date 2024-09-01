@@ -11,7 +11,7 @@ import { Trip, TripService } from './trip.service';
   providedIn: 'root'
 })
 export class TripListResolver implements Resolve<ReadonlyArray<Trip>> {
-  constructor(private tripService: TripService) { }
+  constructor(private tripService: TripService) {}
 
   resolve(_route: ActivatedRouteSnapshot, _state: RouterStateSnapshot): Observable<ReadonlyArray<Trip>> {
     return this.tripService.getTrips();

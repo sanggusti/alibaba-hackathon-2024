@@ -54,7 +54,7 @@ describe('LandingComponent', () => {
   it('should return true if the user is a rider', () => {
     localStorage.clear();
     localStorage.setItem('taxi.auth', JSON.stringify(
-      createFakeToken(createFakeUser({ group: 'rider' }))
+      createFakeToken(createFakeUser({ group: 'sang_peduli' }))
     ));
     expect(component.isRider()).toBeTruthy();
   });
