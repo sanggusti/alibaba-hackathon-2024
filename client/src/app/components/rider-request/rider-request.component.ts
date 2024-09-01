@@ -12,9 +12,9 @@ import { AuthService } from '../../services/auth.service';
 import { TripService, WritableTripData } from '../../services/trip.service';
 
 const GOOGLE_MAPS_API_URL = 'https://maps.googleapis.com/maps/api/js';
-// Coordinates of Washington, DC, USA
-const INITIAL_LAT = 38.89511;
-const INITIAL_LNG = -77.03637;
+// Coordinates of ITB, Bandung, Indonesia
+const INITIAL_LAT = -6.893184;
+const INITIAL_LNG = 107.611019;
 
 @Component({
   selector: 'app-rider-request',
