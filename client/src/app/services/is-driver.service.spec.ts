@@ -1,16 +1,24 @@
-import { TestBed } from '@angular/core/testing';
+import { IsDriver } from './is-driver.service';
+import { createFakeToken, createFakeUser } from '../testing/factories';
 
-import { IsDriverService } from './is-driver.service';
-
-describe('IsDriverService', () => {
-  let service: IsDriverService;
+describe('IsDriver', () => {
+  let isDriver: IsDriver;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(IsDriverService);
+    isDriver = new IsDriver();
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('should allow a driver to access a route', () => {
+    localStorage.setItem('taxi.auth', JSON.stringify(
+      createFakeToken(createFakeUser({ group: 'driver' }))
+    ));
+    expect(isDriver.canActivate()).toBeTruthy();
+  });
+
+  it('should not allow a non-driver to access a route', () => {
+    localStorage.setItem('taxi.auth', JSON.stringify(
+      createFakeToken(createFakeUser({ group: 'rider' }))
+    ));
+    expect(isDriver.canActivate()).toBeFalsy();
   });
 });
